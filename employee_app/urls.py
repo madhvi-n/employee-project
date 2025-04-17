@@ -20,9 +20,12 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from .schema import schema_view
 from django.conf import settings
+from .health_check import health_check
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('health/', health_check, name='health_check'),
     path("", include("employees.urls")),
     path(
         "api/swagger/",

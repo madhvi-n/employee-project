@@ -3,8 +3,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.pagination import PageNumberPagination
 
-from .models import Department, Employee, PerformanceRecord, Attendance, Project, ProjectAssignment
-from .serializers import (
+from employees.models import Department, Employee, PerformanceRecord, Attendance, Project, ProjectAssignment
+from employees.serializers import (
     DepartmentSerializer,
     EmployeeSerializer,
     PerformanceRecordSerializer,

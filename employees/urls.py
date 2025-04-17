@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework_nested import routers
-from .views import EmployeeViewSet, PerformanceRecordViewSet, AttendanceViewSet, DepartmentViewSet, ProjectViewSet
+from .views import EmployeeViewSet, PerformanceRecordViewSet, AttendanceViewSet, DepartmentViewSet, ProjectViewSet, DepartmentDistributionChartView, EmployeeRolePerDepartmentChartView
 
 
 router = routers.SimpleRouter()
@@ -16,6 +16,8 @@ employee_router.register(r'performance', PerformanceRecordViewSet, basename='emp
 
 
 urlpatterns = [
+    path('chart/department-distribution/', DepartmentDistributionChartView.as_view(), name='department_distribution_chart'),
+    path('chart/employee-role-per-department/<int:department_id>/', EmployeeRolePerDepartmentChartView.as_view(), name='employee_role_per_department_chart'),
     path("api/v1/", include(router.urls)),
     path("api/v1/", include(employee_router.urls)),
 ]
