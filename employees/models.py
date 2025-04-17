@@ -40,3 +40,24 @@ class Attendance(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length=100)
     employee = models.ManyToManyField(Employee)
+
+
+class ProjectAssignment(models.Model):
+    class Status(models.TextChoices):
+        ONGOING = "Ongoing", "Ongoing"
+        ON_HOLD = "On Hold", "On Hold"
+        COMPLETED = "Completed", "Completed"
+        CANCELLED = "Cancelled", "Cancelled"
+
+    employee = models.ForeignKey('Employee', on_delete=models.CASCADE)
+    project = models.ForeignKey('Project', on_delete=models.CASCADE)
+    assigned_date = models.DateField(auto_now_add=True)
+    end_date = models.DateField(null=True, blank=True)
+    status = models.CharField(
+        max_length=20,
+        choices=Status.choices,
+        default=Status.ONGOING
+    )
+
+    def __str__(self):
+        return f"{self.employee.name} -> {self.project.name} ({self.status})"

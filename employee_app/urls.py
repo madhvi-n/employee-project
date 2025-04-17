@@ -34,4 +34,4 @@ urlpatterns = [
         schema_view.with_ui("redoc", cache_timeout=0),
         name="redoc-docs",
     ),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
