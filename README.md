@@ -65,6 +65,9 @@ DATABASE_PASSWORD=db-password
 DATABASE_HOST=db-host
 DATABASE_PORT=5432
 ```
+## HealthCheck Endpoint
+The health check api can be accessed at `/health`
+
 
 ## 🚀 Running with Docker
 ### 🐳 Build and Run with Docker
