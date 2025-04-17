@@ -32,9 +32,13 @@ class Command(BaseCommand):
         project_names = ["Project X", "Project Y", "Project Z"]
         project_objects = [Project.objects.create(name=name) for name in project_names]
 
+        #Predefined roles 
+        roles = ['Senior', 'Lead', 'Manager', 'VP', 'Intern']
+
         # Step 3: Define seeding function
         def seed_employee(_):
             department = random.choice(department_objects)
+            role = random.choice(roles)
 
             employee = Employee.objects.create(
                 name=fake.name(),
@@ -42,7 +46,7 @@ class Command(BaseCommand):
                 age=random.randint(22, 60),
                 department=department,
                 hire_date=fake.date_between(start_date="-5y", end_date="today"),
-                role=fake.job(),
+                role=role,
             )
 
             # Attendance
