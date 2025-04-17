@@ -55,6 +55,46 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
+## Environment variables
+Create a `.env` file similar to `.env.example` with correct credentials
+```sh
+SECRET_KEY=django-secret-key
+DATABASE_NAME=db-name
+DATABASE_USER=db-user
+DATABASE_PASSWORD=db-password
+DATABASE_HOST=db-host
+DATABASE_PORT=5432
+```
+
+## 🚀 Running with Docker
+### 🐳 Build and Run with Docker
+To build and run the project using Docker:
+```sh
+# Step 1: Build the Docker image
+docker build -t employee-dashboard .
+
+# Step 2: Run the container
+docker run -p 8000:8000 employee-dashboard
+```
+
+### 🧩 Using Docker Compose
+If you prefer Docker Compose, use the following
+```
+# Build and run services
+docker-compose up --build
+```
+
+Or if the image is already built:
+```sh
+docker-compose up
+```
+
+To stop the services
+```sh
+docker-compose down
+```
+
+
 ## 📚 API Documentation
 Interactive Swagger UI is available at:
 📍 `localhost:8000/api/swagger`
