@@ -1,46 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+<html>
 
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Employee Roles in Department</title>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <style>
             body {
                 font-family: Arial, sans-serif;
             }
 
-            #chartContainer {
+            #ChartContainer {
                 width: 100%;
                 max-width: 600px;
-                /* Optional max width */
                 height: 400px;
-                /* Set a fixed height for the container */
                 margin: 0 auto;
-                /* Center the chart */
             }
 
-            #chart {
+            #roleChart {
                 width: 100%;
                 height: 100%;
             }
         </style>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
 
     <body>
         <h1>Employee Roles in Department</h1>
-        <div id="chartContainer">
+        <div id="ChartContainer">
             <canvas id="roleChart"></canvas>
         </div>
 
+        <!-- Use json_script to pass the data safely to JS -->
+        <script type="application/json" id="role-data">
+        {{ data|json_script:"role-data" }}
+    </script>
+
         <script>
-            // Parse the JSON data from Django template safely
-            const roleData = JSON.parse('{{ data|escapejs }}');
-            var ctx = document.getElementById('roleChart').getContext('2d');
-            var roleChart = new Chart(ctx, {
-                type: 'pie',
-                data: roleData,
+            document.addEventListener('DOMContentLoaded', function () {
+                // Safely parse the role data into a JavaScript object
+                const roleData = JSON.parse(document.getElementById('role-data').textContent);
+                console.log(roleData);  // Check if the data looks correct in the console
+
+                const ctx = document.getElementById('roleChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: roleData,
+                    options: {
+                        responsive: true,
+                    }
+                });
             });
         </script>
     </body>

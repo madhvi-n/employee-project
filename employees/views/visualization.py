@@ -31,16 +31,20 @@ class EmployeeRolePerDepartmentChartView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        print(context)
         department_id = self.kwargs['department_id']
 
+        print(department_id)
+
+        # Using values() and annotate() to get role counts for the department
         role_counts = Employee.objects.filter(department_id=department_id).values('role').annotate(count=Count('id'))
 
         context['data'] = {
-            'labels': [item['role'] for item in role_counts],  # List comprehension for labels
+            'labels': [item['role'] for item in role_counts],
             'datasets': [{
-                'data': [item['count'] for item in role_counts],  # List comprehension for data values
-                'backgroundColor': ['#FF5733', '#33FF57', '#3357FF', '#FF33A8']  # List of colors for the chart
+                'data': [item['count'] for item in role_counts],
+                'backgroundColor': ['#FF5733', '#33FF57', '#3357FF', '#FF33A8', '#FF5733']
             }]
         }
+        print(context)
         return context

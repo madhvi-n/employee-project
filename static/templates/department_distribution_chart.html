@@ -7,7 +7,7 @@
                 font-family: Arial, sans-serif;
             }
 
-            #departmentChartContainer {
+            #roleChartContainer {
                 width: 100%;
                 max-width: 600px;
                 /* Optional max width */
@@ -17,7 +17,7 @@
                 /* Center the chart */
             }
 
-            #departmentChart {
+            #roleChart {
                 width: 100%;
                 height: 100%;
             }
@@ -25,15 +25,15 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Load the chart library -->
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                // Safely parse the department data into a JavaScript object
-                const departmentData = JSON.parse('{{ data|escapejs }}');
+                // Safely parse the role data into a JavaScript object
+                const roleData = JSON.parse('{{ roleData|escapejs }}');
 
-                const ctx = document.getElementById('departmentChart').getContext('2d');
+                const ctx = document.getElementById('roleChart').getContext('2d');
                 new Chart(ctx, {
                     type: 'pie',
-                    data: departmentData,
+                    data: roleData,
                     options: {
-                        responsive: true
+                        responsive: true,
                     }
                 });
             });
@@ -41,9 +41,9 @@
     </head>
 
     <body>
-        <h1>Department Distribution</h1>
-        <div id="departmentChartContainer">
-            <canvas id="departmentChart"></canvas>
+        <h1>Employee Roles in Department</h1>
+        <div id="roleChartContainer">
+            <canvas id="roleChart"></canvas>
         </div>
     </body>
 
