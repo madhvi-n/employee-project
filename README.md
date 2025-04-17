@@ -26,7 +26,7 @@ cd employee-project
 
 2.  Create virtual environment
 ```sh
-python -m venv venv
+python -m virtualenv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
