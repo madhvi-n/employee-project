@@ -39,7 +39,6 @@ class AttendanceAdmin(admin.ModelAdmin):
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
-    filter_horizontal = ("employee",)
     search_fields = ("name",)
 
 

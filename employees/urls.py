@@ -1,9 +1,19 @@
 from django.urls import path, include
 from rest_framework_nested import routers
-from .views import EmployeeViewSet
+from .views import EmployeeViewSet, PerformanceRecordViewSet, AttendanceViewSet, DepartmentViewSet, ProjectViewSet
+
 
 router = routers.SimpleRouter()
-router.register(r"employees", EmployeeViewSet)
+router.register(r'employees', EmployeeViewSet)
+router.register(r'departments', DepartmentViewSet)
+router.register(r'projects', ProjectViewSet)
+
+employee_router = routers.NestedSimpleRouter(
+    router, r'employees', lookup='employee'
+)
+employee_router.register(r'attendance', AttendanceViewSet)
+employee_router.register(r'performance', PerformanceRecordViewSet)
+
 
 urlpatterns = [
     path("api/v1/", include(router.urls)),

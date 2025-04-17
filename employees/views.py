@@ -4,12 +4,20 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.pagination import PageNumberPagination
 
 from .models import Department, Employee, PerformanceRecord, Attendance, Project
-from .serializers import DepartmentSerializer, EmployeeSerializer, PerformanceRecordSerializer, AttendanceSerializer, ProjectSerializer
+from .serializers import (
+    DepartmentSerializer,
+    EmployeeSerializer,
+    PerformanceRecordSerializer,
+    AttendanceSerializer,
+    ProjectSerializer,
+)
 
 
 class CustomPagination(PageNumberPagination):
     page_size = 50
-    page_size_query_param = 'page_size'  # Allow client to specify the number of items per page
+    page_size_query_param = (
+        "page_size"  # Allow client to specify the number of items per page
+    )
     max_page_size = 100
 
 

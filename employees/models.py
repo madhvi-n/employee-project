@@ -5,6 +5,9 @@ from django.db import models
 class Department(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class Employee(models.Model):
     name = models.CharField(max_length=100)
@@ -13,6 +16,9 @@ class Employee(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     hire_date = models.DateField()
     role = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class PerformanceRecord(models.Model):
@@ -39,7 +45,9 @@ class Attendance(models.Model):
 
 class Project(models.Model):
     name = models.CharField(max_length=100)
-    employee = models.ManyToManyField(Employee)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class ProjectAssignment(models.Model):
@@ -49,15 +57,13 @@ class ProjectAssignment(models.Model):
         COMPLETED = "Completed", "Completed"
         CANCELLED = "Cancelled", "Cancelled"
 
-    employee = models.ForeignKey('Employee', on_delete=models.CASCADE)
-    project = models.ForeignKey('Project', on_delete=models.CASCADE)
+    employee = models.ForeignKey("Employee", on_delete=models.CASCADE)
+    project = models.ForeignKey("Project", on_delete=models.CASCADE)
     assigned_date = models.DateField(auto_now_add=True)
     end_date = models.DateField(null=True, blank=True)
     status = models.CharField(
-        max_length=20,
-        choices=Status.choices,
-        default=Status.ONGOING
+        max_length=20, choices=Status.choices, default=Status.ONGOING
     )
 
     def __str__(self):
-        return f"{self.employee.name} -> {self.project.name} ({self.status})"
+        return f"{self.employee.name} -> {self.project.name} ({self.get_status_display()})"
